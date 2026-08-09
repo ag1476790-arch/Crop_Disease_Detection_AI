@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report {{ report.id }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="container">
+            <header class="hero-panel">
+                <div class="hero-copy">
+                    <div class="brand-icon">📝</div>
+                    <div>
+                        <h1>Report #{{ report.id }}</h1>
+                        <p class="subtitle">View the saved image, predicted disease, and confidence for this result.</p>
+                    </div>
+                </div>
+                <div>
+                    <a class="secondary-button" href="/history">Back to history</a>
+                    <a class="secondary-button" href="/">New prediction</a>
+                </div>
+            </header>
+
+            <section class="result-card report-card">
+                <div class="report-image">
+                    <img src="{{ url_for('static', filename='uploads/' ~ report.filename) }}" alt="Saved leaf image" loading="lazy">
+                </div>
+
+                <div class="report-details">
+                    <p><strong>Disease:</strong> {{ report.predicted_class }}</p>
+                    <p><strong>Confidence:</strong> {{ report.confidence|round(2) }}%</p>
+                    <p><strong>Saved:</strong> {{ report.created_at }}</p>
+                    <div class="treatment-block report-treatment">
+                        <h3>Treatment Guidance</h3>
+                        <p>{{ treatment }}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

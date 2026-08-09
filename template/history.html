@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="container">
+            <header class="hero-panel">
+                <div class="hero-copy">
+                    <div class="brand-icon">📄</div>
+                    <div>
+                        <h1>Saved Reports</h1>
+                        <p class="subtitle">Browse previously processed results and open any report to view the image and prediction details.</p>
+                    </div>
+                </div>
+                <a class="secondary-button" href="/">Back to upload</a>
+            </header>
+
+            {% if error %}
+            <div class="error-card">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+
+        {% if reports %}
+        <div class="report-list">
+            {% for report in reports %}
+            <a class="report-entry" href="/report/{{ report.id }}">
+                <div>
+                    <strong>#{{ report.id }} - {{ report.predicted_class }}</strong>
+                    <p>{{ report.created_at }} — Confidence: {{ report.confidence|round(2) }}%</p>
+                </div>
+                <span>View</span>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="upload-card">
+            <p>No reports saved yet. Run a prediction first.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

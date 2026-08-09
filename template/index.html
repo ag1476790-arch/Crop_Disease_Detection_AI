@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <div class="container">
+            <header class="hero-panel">
+                <div class="hero-copy">
+                    <div class="brand-icon">🌿</div>
+                    <div>
+                        <h1>Crop Disease Detection</h1>
+                        <p class="subtitle">Upload a leaf image and get instant disease detection results. Your history is saved automatically.</p>
+                    </div>
+                </div>
+                <a class="secondary-button" href="/history">View past reports</a>
+            </header>
+            <section class="upload-card">
+                <form action="/predict" method="POST" enctype="multipart/form-data">
+                    <label for="file" class="upload-label">Choose a plant leaf image</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                    <button type="submit">🔍 Detect Disease</button>
+                </form>
+            </section>
+            {% if report_saved %}
+            <div class="message-card success-card">
+                <p>Prediction saved to history.</p>
+            </div>
+            {% endif %}
+            {% if prediction %}
+            <section class="result-card">
+                <h2>Prediction Result</h2>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <p>Disease</p>
+                        <strong>{{ prediction }}</strong>
+                    </div>
+                    <div class="result-item">
+                        <p>Confidence</p>
+                        <strong>{{ confidence }}%</strong>
+                    </div>
+                </div>
+                <div class="treatment-block">
+                    <h3>Treatment Guidance</h3>
+                    <p>{{ treatment }}</p>
+                </div>
+            </section>
+            {% endif %}
+            {% if error %}
+            <div class="message-card error-card">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
