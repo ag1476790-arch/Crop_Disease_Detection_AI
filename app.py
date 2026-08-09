@@ -10,6 +10,9 @@ import numpy as np
 import os
 import sqlite3
 import datetime
+import tensorflow as tf
+tf.config.threading.set_intra_op_parallelism_threads(1)
+tf.config.threading.set_inter_op_parallelism_threads(1)
 
 
 class DenseCompat(KerasDense):
@@ -119,7 +122,7 @@ custom_objects = {
     "Dense": DenseCompat
 }
 
-model = load_model(MODEL_PATH, custom_objects=custom_objects)
+model = load_model(MODEL_PATH, custom_objects=custom_objects,compile=False)
 
 
 # --------------------------------------------------
