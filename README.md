@@ -55,7 +55,7 @@ http://127.0.0.1:5000
 ```
 .
 ├── app.py                          # Main Flask application
-├── crop_disease_model (1).keras    # Trained TensorFlow model
+├── crop_disease_model.keras    # Trained TensorFlow model
 ├── requirements.txt                # Python dependencies
 ├── template/                       # HTML templates
 │   ├── index.html                 # Home page
